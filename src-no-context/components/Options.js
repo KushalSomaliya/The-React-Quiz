@@ -1,19 +1,14 @@
-import { useQuiz } from "../context/QuizContext";
-
-function Options() {
-  const { curQuestion, index, dispatch, answer, status } = useQuiz();
-
+function Options({ question, index, dispatch, answer, preview }) {
   const hasAnswered = answer.at(index) !== undefined;
-  const isPreviewing = status === "preview";
 
-  if (isPreviewing)
+  if (preview)
     return (
       <div className="options">
-        {curQuestion.options.map((option, i) => (
+        {question.options.map((option, i) => (
           <button
             className={`btn btn-option ${
               i === answer.at(index) ? "answer" : ""
-            } ${i === curQuestion.correctOption ? "correct" : "wrong"}`}
+            } ${i === question.correctOption ? "correct" : "wrong"}`}
             key={option}
             disabled
           >
@@ -25,13 +20,13 @@ function Options() {
 
   return (
     <div className="options">
-      {curQuestion.options.map((option, i) => (
+      {question.options.map((option, i) => (
         <button
           className={`btn btn-option ${
             i === answer.at(index) ? "answer" : ""
           } ${
             hasAnswered
-              ? i === curQuestion.correctOption
+              ? i === question.correctOption
                 ? "correct"
                 : "wrong"
               : ""

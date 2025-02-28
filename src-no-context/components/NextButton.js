@@ -1,8 +1,4 @@
-import { useQuiz } from "../context/QuizContext";
-
-function NextButton() {
-  const { dispatch, answer, index, numQuestions } = useQuiz();
-
+function NextButton({ dispatch, answer, index, numQuestions }) {
   if (answer.at(index) === undefined) return null;
 
   const isNotLastQuestion = index < numQuestions - 1;
